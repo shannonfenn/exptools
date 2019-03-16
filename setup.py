@@ -18,7 +18,9 @@ setup(
             'list_subdirs = scripts.list_subdirs:main',
             'summarise_multiexp = scripts.summarise_multiexp:main',
             'submit_bundled_jobs = scripts.submit_bundled_jobs:main',
-            'bundle = scripts.bundle:main',
+            'bundle = exptools.bundle:main',
+            'concatenate_results = scripts.concatenate_results:main',
+            'merge_results = scripts.merge_results:main',
         ],
     }
     # url='https://github.com/shannonfenn/data-tools',
