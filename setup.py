@@ -16,8 +16,8 @@ setup(
             'check_run = scripts.check_run:main',
             'check_solo_results = scripts.check_solo_results:main',
             'list_subdirs = scripts.list_subdirs:main',
-            'summarise_multiexp = scripts.summarise_multiexp:main'
-            'submit_bundled_jobs = scripts.submit_bundled_jobs:main'
+            'summarise_multiexp = scripts.summarise_multiexp:main',
+            'submit_bundled_jobs = scripts.submit_bundled_jobs:main',
         ],
     }
     # url='https://github.com/shannonfenn/data-tools',
