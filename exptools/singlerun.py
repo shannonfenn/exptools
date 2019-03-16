@@ -52,7 +52,8 @@ def non_memorised_experiments(directory, fast=True):
 
     failed_ids = []
     for fname in all_json:
-        failed_ids.extend(sf.non_memorised(fname))
+        with open(fname) as f:
+            failed_ids.extend(sf.non_memorised(f))
 
     explist = all_experiments(directory)
     expmap = dict()
