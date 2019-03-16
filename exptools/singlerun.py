@@ -47,7 +47,7 @@ def remaining_experiments(directory, fast=True):
     return remaining
 
 
-def non_memorised(directory, fast=True):
+def non_memorised_experiments(directory, fast=True):
     all_json = glob.glob(join(directory, '*.json'))
 
     failed_ids = []
