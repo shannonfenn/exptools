@@ -1,9 +1,9 @@
-from os.path import abspath, expanduser, isdir
+from os.path import expanduser, isdir
 
 
 def directory_type(directory):
     # Handle tilde
-    directory = abspath(expanduser(directory))
+    directory = expanduser(directory)
     if isdir(directory):
         return directory
     else:

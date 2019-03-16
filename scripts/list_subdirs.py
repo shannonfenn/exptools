@@ -15,12 +15,10 @@ def main():
     args = parser.parse_args()
 
     if args.last:
-        subdirs = singleexp.get_last_dirs(args.dir)
+        print(singleexp.get_last_run_dir(args.dir))
     else:
-        subdirs = singleexp.get_run_dirs(args.dir)
-
-    if subdirs:
-        print(subdirs)
+        print('\n'.join(
+            singleexp.get_run_dirs(args.dir)))
 
 
 if __name__ == '__main__':
