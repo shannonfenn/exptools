@@ -15,10 +15,10 @@ def main():
 
     if args.inputfile.endswith('.xz'):
         with lzma.open(args.inputfile, 'rt') as f:
-            sf.summary(f)
+            sf.summary(f, True)
     else:
         with open(args.inputfile) as f:
-            sf.summary(f)
+            sf.summary(f, True)
 
 
 if __name__ == '__main__':
