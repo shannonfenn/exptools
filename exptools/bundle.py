@@ -10,10 +10,10 @@ from natsort import natsorted
 import exptools.utils as utils
 
 
-def bundle(dir, num=None, experiments=None):
+def create_bundles(expdir, num=None, experiments=None):
     if experiments is None:
-        experiments = natsorted(glob.glob('{}/tasks/*.exp'.format(dir)))
-
+        experiments = natsorted(glob.glob(
+            f'{expdir}/tasks/*.exp'))
     if experiments:
         num = min(num, len(experiments))
         return utils.strided(experiments, num)
@@ -21,14 +21,9 @@ def bundle(dir, num=None, experiments=None):
         return None
 
 
-def dump_new_bundle(dir, num=None, experiments=None):
-    bundles = utils.strided(dir, num, experiments)
-
-    if not bundles:
-        print("No experiments found.")
-        sys.exit(1)
+def dump_new_bundle(expdir, bundles):
     # find first non-existant */run_<int>/
-    dir_generator = (join(dir, str(i))
+    dir_generator = (join(expdir, str(i))
                      for i in itertools.count())
     run_dir = next(directory
                    for directory in dir_generator
@@ -40,7 +35,6 @@ def dump_new_bundle(dir, num=None, experiments=None):
         with open(fname, 'w') as f:
             f.write('\n'.join(bundle))
             f.write('\n')
-
     print('{} bundles created.'.format(len(bundles)))
 
 
@@ -63,7 +57,13 @@ def main():
         args.infile.close()
     else:
         experiments = None
-    bundle(args.dir, args.num, experiments)
+
+    bundles = create_bundles(args.dir, args.num, experiments)
+    if not bundles:
+        print("No experiments found.")
+        sys.exit(1)
+    else:
+        dump_new_bundle(args.dir, bundles)
 
 
 if __name__ == '__main__':
