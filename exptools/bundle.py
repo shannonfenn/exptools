@@ -5,7 +5,7 @@ import glob
 import itertools
 import sys
 import os
-from os.path import isdir, expanduser, abspath, join
+from os.path import isdir, join
 from natsort import natsorted
 import exptools.utils as utils
 
