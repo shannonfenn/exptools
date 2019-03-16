@@ -1,4 +1,3 @@
-import sys
 import rapidjson as json
 
 
@@ -10,32 +9,28 @@ def is_memorised(record):
         return record['trg_err'] == 0
 
 
-def non_memorised(fname, fast=True):
-    with open(fname, 'r') as f:
-        records = [json.loads(line) for line in f if line.strip()]
+def non_memorised(stream, fast=True):
+    records = [json.loads(line)
+               for line in stream
+               if line.strip()]
     return [record['id']
             for record in records
             if not is_memorised(record)]
 
 
-def summary(fname, verbose):
+def summary(stream, swallow_errors):
     num_succeeded = num_failed = num_error = 0
-    try:
-        with open(fname, 'r') as stream:
-            lines = [line for line in stream if line.strip()]
-    except OSError as e:
-        if verbose:
-            print(f'Warning: could not read {fname}\n{e}',
-                  file=sys.stderr)
-
+    lines = [line
+             for line in stream
+             if line.strip()]
     for line in lines:
         try:
             record = json.loads(line)
-        except (ValueError, TypeError) as e:
-            if verbose:
-                print(f'Warning: bad json line {fname}\n{e}',
-                      file=sys.stderr)
-            num_error += 1
+        except (ValueError, TypeError) as err:
+            if swallow_errors:
+                num_error += 1
+            else:
+                raise err
         else:
             if is_memorised(record):
                 num_succeeded += 1

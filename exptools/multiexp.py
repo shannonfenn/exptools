@@ -16,11 +16,12 @@ def get_last_dirs(directory):
     return sorted(lastdirs)
 
 
-def summarise_all(directories, verbose):
+def summarise_all(directories, swallow_errors):
     dir_width = max(len(dirname) for dirname in directories)
 
     for directory in directories:
-        n_rem, n_succ, n_failed, n_err = singlerun.summary(directory, verbose)
+        n_rem, n_succ, n_failed, n_err = singlerun.summary(
+            directory, swallow_errors)
         print(f'{directory:<{dir_width}} '
               f'rem: {n_rem:>4} mem: {n_succ:>4} '
               f'not-mem: {n_failed:>4} json-err: {n_err:>4}')

@@ -14,7 +14,7 @@ def __non_memorised(args):
 
 
 def __summary(args):
-    n_rem, n_suc, n_fail, n_err = singlerun.summary(args.dir, args.verbose)
+    n_rem, n_suc, n_fail, n_err = singlerun.summary(args.dir, not args.verbose)
     return (f'rem: {n_rem} mem: {n_suc} not-mem: {n_fail} json-err: {n_err}')
 
 

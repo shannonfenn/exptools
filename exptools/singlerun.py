@@ -72,13 +72,18 @@ def non_memorised(directory, fast=True):
     return failed_paths
 
 
-def summary(directory, verbose):
+def summary(directory, swallow_errors):
     all_json = glob.glob(join(directory, '*.json'))
 
     num_exp = len(all_experiments(directory))
     num_succeeded = num_failed = num_error = 0
     for fname in all_json:
-        s, f, e = sf.summary(fname, verbose)
+        try:
+            with open(fname) as f:
+                s, f, e = sf.summary(f, swallow_errors)
+        except OSError as err:
+            if not swallow_errors:
+                raise err
         num_succeeded += s
         num_failed += f
         num_error += e

@@ -17,7 +17,7 @@ def main():
     lastdirs = multiexp.get_last_dirs(args.dir)
 
     if lastdirs:
-        multiexp.summarise_all(lastdirs, args.verbose)
+        multiexp.summarise_all(lastdirs, not args.verbose)
 
 
 if __name__ == '__main__':
