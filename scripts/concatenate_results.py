@@ -27,8 +27,11 @@ def process(run_dir, fname=None, mode='x'):
     partials = natsorted(partials)
     if not fname:
         fname = f'{os.path.normpath(run_dir)}.json'
-    with open(fname, mode) as f:
-        concatenate(partials, f)
+    try:
+        with open(fname, mode) as f:
+            concatenate(partials, f)
+    except FileExistsError:
+        print(f'{fname} exists. Skipping.')
 
 
 def main():
