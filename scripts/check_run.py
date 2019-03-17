@@ -6,16 +6,20 @@ import exptools.singlerun as singlerun
 
 
 def __remaining(args):
-    return '\n'.join(singlerun.remaining_experiments(args.dir))
+    tasks = singlerun.remaining_experiments(args.dir)
+    if tasks:
+        print('\n'.join(tasks))
 
 
 def __non_memorised(args):
-    return '\n'.join(singlerun.non_memorised_experiments(args.dir))
+    tasks = singlerun.non_memorised_experiments(args.dir)
+    if tasks:
+        print('\n'.join(tasks))
 
 
 def __summary(args):
     n_rem, n_suc, n_fail, n_err = singlerun.summary(args.dir, not args.verbose)
-    return (f'rem: {n_rem} mem: {n_suc} not-mem: {n_fail} json-err: {n_err}')
+    print(f'rem: {n_rem} mem: {n_suc} not-mem: {n_fail} json-err: {n_err}')
 
 
 def main():
@@ -40,7 +44,7 @@ def main():
 
     args = parser.parse_args()
 
-    print(args.func(args))
+    args.func(args)
 
 
 if __name__ == '__main__':
