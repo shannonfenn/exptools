@@ -69,6 +69,8 @@ def main():
                         help='print resulting commands instead of executing.')
     args = parser.parse_args()
 
+    args.dir = os.path.abspath(os.path.expanduser(args.dir))
+
     if not args.out:
         args.out = open(os.path.join(args.dir, 'jobids'), 'w')
 
