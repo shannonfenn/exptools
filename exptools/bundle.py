@@ -5,7 +5,7 @@ import glob
 import itertools
 import sys
 import os
-from os.path import isdir, join
+from os.path import isdir, join, abspath
 from natsort import natsorted
 import exptools.utils as utils
 
@@ -46,6 +46,8 @@ def main():
                         help='list of experiments (.exp) to run')
 
     args = parser.parse_args()
+
+    args.dir = abspath(args.dir)
 
     if not (1 <= args.num <= 7500):
         parser.error('--num must be in [1..7500].')
