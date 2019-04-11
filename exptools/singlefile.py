@@ -2,7 +2,7 @@ import rapidjson as json
 
 
 def is_memorised(record):
-    if record['learner'] == 'ecc_member':
+    if record.get('learner', None) == 'ecc_member':
         # this learner uses bagging so gets non zero trg error even when mem'd
         return sum(record['best_err']) == 0
     else:
